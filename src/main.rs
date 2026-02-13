@@ -20,7 +20,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn calculate(op: char, a: f64, b: Option<f64>) -> Result<f64, String> {
     match op{
-        '+' | '*' | 'x' | '-' | '/' | '^' => {
+        '+' | '*' | 'x' | '-' | '/' | '^' | 'r' => {
             let b_val = b.ok_or("cet opérateur nécessite 2 nombres")?;
             classic_operators(op, a, b_val)
         }
@@ -40,8 +40,9 @@ fn classic_operators(op: char, a: f64, b: f64) -> Result<f64, String>{
             }else{
                 Ok(a / b)
             }
-        }
+        },
         '^' => Ok(a.powf(b)),
+        'r' => Ok(b.powf(1.0/a)),
         _ => unreachable!()
     }
 }
